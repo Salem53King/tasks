@@ -1,6 +1,3 @@
-
-
-
 import 'dart:io';
 
 import 'package:tasks/exceptions/task_exceptions.dart';
@@ -25,10 +22,7 @@ void main() {
   });
 
   test('Le service ajoute une tâche et la persiste', () async {
-    await service.addTask(
-      title: 'Nouvelle tâche',
-      priority: Priority.high,
-    );
+    await service.addTask(title: 'Nouvelle tâche', priority: Priority.high);
 
     final tasks = await service.getTasks();
 

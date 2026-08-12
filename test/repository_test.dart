@@ -1,5 +1,3 @@
-
-
 import 'dart:io';
 
 import 'package:tasks/models/simple_tasks.dart';
@@ -7,15 +5,12 @@ import 'package:tasks/models/task.dart';
 import 'package:tasks/repository/task_repository.dart';
 import 'package:test/test.dart';
 
-
 void main() {
   test('Le repository sauvegarde puis recharge les tâches', () async {
     final directory = await Directory.systemTemp.createTemp('tasks_repo_');
     addTearDown(() => directory.delete(recursive: true));
 
-    final repository = TaskRepository(
-      filePath: '${directory.path}/tasks.json',
-    );
+    final repository = TaskRepository(filePath: '${directory.path}/tasks.json');
     final task = SimpleTask(
       id: 'persisted',
       title: 'Persister',

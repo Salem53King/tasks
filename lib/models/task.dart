@@ -1,5 +1,3 @@
-
-
 import '../exceptions/task_exceptions.dart';
 import 'simple_tasks.dart';
 import 'tasks_interface.dart';
@@ -22,10 +20,14 @@ abstract class Task implements TaskOperations {
     this.isCompleted = false,
   }) {
     if (id.trim().isEmpty) {
-      throw const InvalidTaskException('L\'ID d\'une tâche ne peut pas être vide.');
+      throw const InvalidTaskException(
+        'L\'ID d\'une tâche ne peut pas être vide.',
+      );
     }
     if (title.trim().isEmpty) {
-      throw const InvalidTaskException('Le titre d\'une tâche ne peut pas être vide.');
+      throw const InvalidTaskException(
+        'Le titre d\'une tâche ne peut pas être vide.',
+      );
     }
   }
 
@@ -42,13 +44,13 @@ abstract class Task implements TaskOperations {
 
   @override
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'title': title,
-        'priority': priority.name,
-        'dueDate': dueDate?.toIso8601String(),
-        'isCompleted': isCompleted,
-        'taskType': getTaskType(),
-      };
+    'id': id,
+    'title': title,
+    'priority': priority.name,
+    'dueDate': dueDate?.toIso8601String(),
+    'isCompleted': isCompleted,
+    'taskType': getTaskType(),
+  };
 
   factory Task.fromJson(Map<String, dynamic> json) {
     final taskType = json['taskType'];

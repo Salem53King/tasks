@@ -11,9 +11,7 @@ void main() {
     final directory = await Directory.systemTemp.createTemp('tasks_sort_');
     addTearDown(() => directory.delete(recursive: true));
 
-    final repository = TaskRepository(
-      filePath: '${directory.path}/tasks.json',
-    );
+    final repository = TaskRepository(filePath: '${directory.path}/tasks.json');
     await repository.saveAll([
       SimpleTask(id: 'low', title: 'Faible', priority: Priority.low),
       SimpleTask(id: 'high', title: 'Haute', priority: Priority.high),
@@ -29,20 +27,14 @@ void main() {
     final directory = await Directory.systemTemp.createTemp('tasks_due_');
     addTearDown(() => directory.delete(recursive: true));
 
-    final repository = TaskRepository(
-      filePath: '${directory.path}/tasks.json',
-    );
+    final repository = TaskRepository(filePath: '${directory.path}/tasks.json');
     await repository.saveAll([
       SimpleTask(
         id: 'late',
         title: 'Plus tard',
         dueDate: DateTime(2026, 8, 20),
       ),
-      SimpleTask(
-        id: 'soon',
-        title: 'Bientôt',
-        dueDate: DateTime(2026, 8, 13),
-      ),
+      SimpleTask(id: 'soon', title: 'Bientôt', dueDate: DateTime(2026, 8, 13)),
     ]);
 
     final service = TaskService(repository);

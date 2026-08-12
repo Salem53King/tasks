@@ -1,5 +1,3 @@
-
-
 import 'task.dart';
 
 class SimpleTask extends Task {

@@ -1,5 +1,3 @@
-
-
 import '../exceptions/task_exceptions.dart';
 import 'task.dart';
 
@@ -26,9 +24,9 @@ class UrgentTasks extends Task {
 
   @override
   Map<String, dynamic> toJson() => {
-        ...super.toJson(),
-        'urgencyReason': urgencyReason,
-      };
+    ...super.toJson(),
+    'urgencyReason': urgencyReason,
+  };
 
   factory UrgentTasks.fromJson(Map<String, dynamic> json) {
     final id = json['id'];

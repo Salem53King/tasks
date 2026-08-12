@@ -1,5 +1,3 @@
-
-
 import 'dart:convert';
 import 'dart:io';
 
@@ -14,7 +12,7 @@ class Repository<T> {
   final JsonDecoder<T> fromJson;
   final JsonEncoder<T> toJson;
 
-   Repository({
+  Repository({
     required this.filePath,
     required this.fromJson,
     required this.toJson,
@@ -64,7 +62,7 @@ class Repository<T> {
     try {
       await file.parent.create(recursive: true);
       final jsonList = items.map(toJson).toList();
-       await file.writeAsString(jsonEncode(jsonList));
+      await file.writeAsString(jsonEncode(jsonList));
     } on FileSystemException catch (error) {
       throw RepositoryWriteException(
         'Impossible d\'écrire dans "$filePath" : ${error.message}',
@@ -78,10 +76,7 @@ class Repository<T> {
 }
 
 class TaskRepository extends Repository<Task> {
-   TaskRepository({required super.filePath})
-      : super(
-          fromJson: Task.fromJson,
-          toJson: _taskToJson,
-        );
+  TaskRepository({required super.filePath})
+    : super(fromJson: Task.fromJson, toJson: _taskToJson);
   static Map<String, dynamic> _taskToJson(Task task) => task.toJson();
 }

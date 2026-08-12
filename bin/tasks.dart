@@ -6,7 +6,6 @@ import '../lib/models/task.dart';
 import '../lib/repository/task_repository.dart';
 import '../lib/services/task_service.dart';
 
-
 Future<void> main(List<String> arguments) async {
   try {
     final options = _parseOptions(arguments);
@@ -65,7 +64,9 @@ Map<String, dynamic> _parseOptions(List<String> arguments) {
     final argument = arguments[i];
     if (argument == '--file') {
       if (i + 1 >= arguments.length) {
-        throw const InvalidTaskException('La valeur de --file est obligatoire.');
+        throw const InvalidTaskException(
+          'La valeur de --file est obligatoire.',
+        );
       }
       filePath = arguments[++i];
     } else {
@@ -85,11 +86,7 @@ Future<void> _add(TaskService service, List<String> args) async {
   final priority = args.length >= 2 ? _parsePriority(args[1]) : Priority.medium;
   final dueDate = args.length >= 3 ? _parseDate(args[2]) : null;
 
-  await service.addTask(
-    title: args[0],
-    priority: priority,
-    dueDate: dueDate,
-  );
+  await service.addTask(title: args[0], priority: priority, dueDate: dueDate);
   print('Tâche ajoutée avec succès.');
 }
 

@@ -12,7 +12,7 @@ class TaskException extends AppException {
 class TaskNotFoundException extends TaskException {
   final String id;
   const TaskNotFoundException(this.id)
-      : super('Tâche avec ID "$id" non trouvée.');
+    : super('Tâche avec ID "$id" non trouvée.');
 }
 
 class InvalidTaskException extends TaskException {
