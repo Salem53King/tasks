@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:tasks/models/simple_tasks.dart';
 import 'package:tasks/models/task.dart';
 import 'package:tasks/repository/task_repository.dart';
