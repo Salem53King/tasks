@@ -1,6 +1,6 @@
+// lib/repository/task_repository.dart
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:tasks/models/task.dart';
 import 'package:tasks/exceptions/task_exceptions.dart';
 
@@ -41,6 +41,7 @@ class Repository<T> {
         return fromJson(Map<String, dynamic>.from(item));
       }).toList();
     } on RepositoryException {
+      // Propager les exceptions spécifiques au repository
       rethrow;
     } on FormatException catch (error) {
       throw RepositoryFormatException(
@@ -50,11 +51,24 @@ class Repository<T> {
       throw RepositoryReadException(
         'Impossible de lire "$filePath" : ${error.message}',
       );
-    } catch (error) {
+    } on TypeError catch (error) {
+      // Erreur de type (ex: fromJson retourne le mauvais type)
+      throw RepositoryFormatException(
+        'Erreur de type lors du chargement de "$filePath" : $error',
+      );
+    } on StateError catch (error) {
+      // Erreur d'état (ex: accès à un élément null)
       throw RepositoryReadException(
-        'Erreur lors du chargement de "$filePath" : $error',
+        'Erreur d\'état lors du chargement de "$filePath" : $error',
+      );
+    } on ArgumentError catch (error) {
+      // Erreur d'argument (ex: mauvais format de date)
+      throw RepositoryFormatException(
+        'Erreur d\'argument dans "$filePath" : ${error.message}',
       );
     }
+    // Les autres exceptions (NullError, etc.) ne sont pas attrapées
+    // et remontent pour être visibles en développement
   }
 
   Future<void> saveAll(Iterable<T> items) async {
@@ -63,20 +77,29 @@ class Repository<T> {
       await file.parent.create(recursive: true);
       final jsonList = items.map(toJson).toList();
       await file.writeAsString(jsonEncode(jsonList));
+    } on RepositoryException {
+      // Propager les exceptions spécifiques au repository
+      rethrow;
     } on FileSystemException catch (error) {
       throw RepositoryWriteException(
         'Impossible d\'écrire dans "$filePath" : ${error.message}',
       );
-    } catch (error) {
+    } on StateError catch (error) {
       throw RepositoryWriteException(
-        'Erreur lors de la sauvegarde dans "$filePath" : $error',
+        'Erreur d\'état lors de la sauvegarde dans "$filePath" : $error',
+      );
+    } on ArgumentError catch (error) {
+      throw RepositoryWriteException(
+        'Erreur d\'argument lors de la sauvegarde dans "$filePath" : ${error.message}',
       );
     }
+    // Les autres exceptions remontent normalement
   }
 }
 
 class TaskRepository extends Repository<Task> {
   TaskRepository({required super.filePath})
     : super(fromJson: Task.fromJson, toJson: _taskToJson);
+
   static Map<String, dynamic> _taskToJson(Task task) => task.toJson();
 }

@@ -105,7 +105,7 @@ dart test
 dart analyze
 ```
 
-Les tests couvrent la création, l'héritage, la sérialisation JSON, la persistance, les exceptions, le tri et le fonctionnement réel de la CLI.
+Les tests couvrent la création, l'héritage, la sérialisation JSON, la persistance, les exceptions, le tri.
 
 ## CI/CD
 
