@@ -1,4 +1,4 @@
-import '../exceptions/task_exceptions.dart';
+import 'package:tasks/exceptions/task_exceptions.dart';
 import 'task.dart';
 
 class UrgentTasks extends Task {

@@ -1,8 +1,10 @@
+import 'package:tasks/models/simple_tasks.dart';
+import 'package:tasks/models/task.dart';
+import 'package:tasks/models/urgent_tasks.dart';
 import 'package:test/test.dart';
 
-import '../lib/models/simple_tasks.dart';
-import '../lib/models/task.dart';
-import '../lib/models/urgent_tasks.dart';
+
+
 
 void main() {
   test('Une tâche simple est correctement créée', () {

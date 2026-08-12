@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import '../lib/exceptions/task_exceptions.dart';
-import '../lib/models/list_tasks.dart';
-import '../lib/models/task.dart';
-import '../lib/repository/task_repository.dart';
-import '../lib/services/task_service.dart';
+import 'package:tasks/exceptions/task_exceptions.dart';
+import 'package:tasks/models/list_tasks.dart';
+import 'package:tasks/models/task.dart';
+import 'package:tasks/repository/task_repository.dart';
+import 'package:tasks/services/task_service.dart';
 
 Future<void> main(List<String> arguments) async {
   try {

@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import '../exceptions/task_exceptions.dart';
-import '../models/task.dart';
+import 'package:tasks/models/task.dart';
+import 'package:tasks/exceptions/task_exceptions.dart';
 
 typedef JsonDecoder<T> = T Function(Map<String, dynamic> json);
 typedef JsonEncoder<T> = Map<String, dynamic> Function(T value);
