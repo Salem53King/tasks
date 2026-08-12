@@ -3,9 +3,6 @@ import 'package:tasks/models/task.dart';
 import 'package:tasks/models/urgent_tasks.dart';
 import 'package:test/test.dart';
 
-
-
-
 void main() {
   test('Une tâche simple est correctement créée', () {
     final task = SimpleTask(
